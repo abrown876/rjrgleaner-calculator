@@ -121,8 +121,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 /* DISCOUNT */
 .disc{border-radius:var(--radius);padding:11px 15px;margin-bottom:1.125rem;display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:8px;flex-wrap:wrap}
 .disc.off{background:var(--surface);border:1.5px dashed var(--border);color:var(--muted)}
-.disc.on{background:var(--green-light);border:1.5px solid var(--green-border)}
-.disc.on .dl2{color:var(--green);font-weight:600}
+.disc.on{background:var(--green-light);border:2px solid var(--green-border);box-shadow:0 2px 8px rgba(39,103,73,0.15)}
+.disc.on .dl2{color:var(--green);font-weight:700;font-size:13px}
 .disc.on .dv{color:var(--green);font-weight:700;font-size:15px;white-space:nowrap}
 
 /* ACTION BUTTONS */
@@ -215,14 +215,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 }
 .print-page{display:none}
 .pw{max-width:780px;margin:0 auto;padding:2.5rem 2rem;font-family:'Plus Jakarta Sans',sans-serif}
-.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:4px solid var(--navy)} .ph-by{font-size:13px;color:var(--muted);font-weight:500}
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:3px solid #C9A84C} .ph-by{font-size:13px;color:var(--muted);font-weight:500}
 .ph-logo{height:52px}
 .ph-title{font-family:'Fraunces',serif;font-size:24px;font-weight:700;font-style:italic;color:var(--navy);margin-bottom:3px}
 .ph-by{font-size:11px;color:var(--muted)}
-.pcb{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;background:#f8f9fb;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:4px solid var(--gold)}
+.pcb{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;background:#f8f9fb;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem;border-left:3px solid #C9A84C}
 .pcf label{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
 .pcf span{font-size:13px;font-weight:600;color:#1a202c}
-.ptb{background:var(--navy);border-radius:var(--radius);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.125rem}
+.ptb{background:#1e3a5f;border-radius:var(--radius);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.125rem;border:2px solid #C9A84C}
 .ptl{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.5;font-weight:700;color:white}
 .ptp{font-size:11px;opacity:0.45;margin-top:3px;color:white}
 .ptv{font-family:'Fraunces',serif;font-size:30px;font-weight:700;color:var(--gold)}
@@ -233,13 +233,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .pst{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:1.125rem 0 0.5rem;display:flex;align-items:center;gap:8px}
 .pst::after{content:'';flex:1;height:1px;background:var(--border)}
 .pt{width:100%;border-collapse:collapse;margin-bottom:0.875rem;font-size:12px}
-.pt th{background:var(--navy);color:white;padding:7px 11px;text-align:left;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700}
+.pt th{background:#2d5282;color:white;padding:7px 11px;text-align:left;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700}
 .pt th:last-child{text-align:right}
 .pt td{padding:8px 11px;border-bottom:1px solid var(--border)}
 .pt tr:nth-child(even) td{background:#f8f9fb}
 .pt td:last-child{font-weight:700;color:var(--red);text-align:right}
-.pt .sr td{font-weight:700;border-top:2px solid var(--navy);background:#edf2f7}
-.pdr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--green-light);border:1.5px solid var(--green-border);border-radius:var(--radius);margin-bottom:0.875rem;font-size:13px}
+.pt .sr td{font-weight:700;border-top:2px solid #2d5282;background:#edf2f7}
+.pdr{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 16px;background:#f0faf4;border:2px solid #38a169;border-radius:var(--radius);margin-bottom:0.875rem;font-size:13px;gap:12px}
 .pdl{color:var(--green);font-weight:600}
 .pdv{color:var(--green);font-weight:700;font-size:15px}
 .pf{margin-top:1.75rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
@@ -739,6 +739,16 @@ function recalc(){
   });
   const disc=(active.length>=2&&sB)?Math.round(smbT*0.15):0,grand=ecT+smbT-disc;
   document.getElementById('s-grand').textContent=fmt(grand);
+  // Show discount badge in total card
+  let discBadge = document.getElementById('tc-disc-badge');
+  if(!discBadge){
+    discBadge = document.createElement('div');
+    discBadge.id = 'tc-disc-badge';
+    discBadge.style.cssText='display:inline-block;margin-top:6px;margin-left:8px;padding:3px 10px;background:rgba(56,161,105,0.2);border:1px solid rgba(56,161,105,0.4);border-radius:20px;font-size:11px;font-weight:700;color:#68d391;position:relative;z-index:1';
+    document.getElementById('s-grand').parentNode.insertBefore(discBadge, document.getElementById('s-grand').nextSibling);
+  }
+  discBadge.style.display = disc>0 ? 'inline-block' : 'none';
+  discBadge.textContent = disc>0 ? '✓ Impact Discount Applied — saving JMD '+Math.round(disc).toLocaleString('en-US') : '';
   const ecEl=document.getElementById('s-ec-total'),smbEl=document.getElementById('s-smb-total');
   ecEl.textContent=sE?fmt(ecT):'—';ecEl.className='sc-val'+(sE&&ecT>0?'':' dim');
   smbEl.textContent=sB?fmt(smbT-disc):'—';smbEl.className='sc-val'+(sB&&smbT>0?'':' dim');
@@ -785,7 +795,17 @@ function printProposal(){
     h+=`<tr class="sr"><td colspan="6" style="text-align:right;padding-right:12px">Bundle Subtotal</td><td>${fmtN(smbT)}</td></tr></tbody></table>`;
     document.getElementById('p-smb-section').innerHTML=h;
   }else document.getElementById('p-smb-section').innerHTML='';
-  document.getElementById('p-discount-section').innerHTML=disc>0?`<div class="pdr"><span class="pdl">✓ Impact Discount (15% — 2+ brands selected)</span><span class="pdv">−JMD ${fmtN(disc)}</span></div>`:'';
+  document.getElementById('p-discount-section').innerHTML=disc>0?`
+  <div class="pdr">
+    <div>
+      <div class="pdl">✓ Impact Discount Applied</div>
+      <div style="font-size:11px;color:var(--green);margin-top:2px">15% off Promotional Bundles — ${active.length} brands selected</div>
+    </div>
+    <div style="text-align:right">
+      <div class="pdv">−JMD ${fmtN(disc)}</div>
+      <div style="font-size:11px;color:var(--green);margin-top:2px">Saving on bundle total</div>
+    </div>
+  </div>`:'';
   window.print();
 }
 
