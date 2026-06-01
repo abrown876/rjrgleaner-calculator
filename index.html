@@ -63,16 +63,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .pkg-btn.active{border-color:var(--navy-mid);background:#f0f4f9;color:var(--navy)}
 
 /* BRAND TABLE */
-.bt{width:100%;border-collapse:collapse;table-layout:fixed;word-break:break-word}
+.bt{width:100%;border-collapse:collapse}
 .bt th{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 5px 8px;text-align:left;border-bottom:1.5px solid var(--border);overflow:hidden;vertical-align:bottom}
-.bt td{padding:8px 5px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:left}
+.bt td{padding:8px 4px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:left}
 .bt tr:last-child td{border-bottom:none}
-.bt th:nth-child(1),.bt td:nth-child(1){width:30%}
-.bt th:nth-child(2),.bt td:nth-child(2){width:26%;text-align:left}
-.bt th:nth-child(3),.bt td:nth-child(3){width:22%}
-.bt th:nth-child(4),.bt td:nth-child(4){width:22%}
-.brand-cell{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1a202c;overflow:hidden}
-.toggle-wrap{display:flex;flex-direction:row;gap:4px;align-items:center;flex-wrap:nowrap;width:max-content}
+.bt th:nth-child(2),.bt td:nth-child(2){text-align:left;white-space:nowrap}
+.bt th:nth-child(3),.bt td:nth-child(3){width:25%}
+.bt th:nth-child(4),.bt td:nth-child(4){width:25%}
+.brand-cell{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#1a202c;overflow:hidden}
+.toggle-wrap{display:flex;flex-direction:row;gap:4px;align-items:center;flex-wrap:nowrap}
 .tog{padding:5px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.15s;background:var(--white);color:var(--muted)}
 .tog.yes.active{background:var(--green-light);border-color:var(--green-border);color:var(--green)}
 .tog.no.active{background:var(--surface);color:var(--muted)}
@@ -209,6 +208,24 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .mkct{font-size:14px;font-weight:600;color:var(--gold)}
 .mkcd{font-size:12px;color:rgba(255,255,255,0.55);margin-top:3px}
 .mkdate{font-size:11px;color:rgba(255,255,255,0.3);font-style:italic}
+
+/* CUSTOM LINE ITEMS */
+.custom-section{margin-bottom:1.5rem}
+.custom-item{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;margin-bottom:6px}
+.custom-item input{padding:7px 10px;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;color:#1a202c;background:var(--white);outline:none;transition:border-color 0.15s;width:100%}
+.custom-item input:focus{border-color:var(--navy-mid)}
+.custom-item input::placeholder{color:#cbd5e0}
+.custom-item .price-input{width:110px}
+.custom-item .remove-btn{width:28px;height:28px;border:1.5px solid var(--border);border-radius:6px;background:var(--white);cursor:pointer;color:var(--muted);font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;padding:0}
+.custom-item .remove-btn:hover{border-color:var(--red);color:var(--red)}
+.add-item-btn{width:100%;padding:8px;border:1.5px dashed var(--border);border-radius:var(--radius);background:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:var(--muted);transition:all 0.15s;text-align:center}
+.add-item-btn:hover{border-color:var(--gold);color:var(--navy)}
+.custom-summary{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:8px}
+.custom-summary-head{padding:10px 13px;background:#f8f9fb;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:var(--navy)}
+.custom-line{display:flex;justify-content:space-between;align-items:center;padding:7px 13px;border-bottom:1px solid #f5f5f5;font-size:13px}
+.custom-line:last-child{border-bottom:none}
+.custom-line-name{color:var(--slate);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-right:12px}
+.custom-line-val{font-weight:700;color:#1a202c;white-space:nowrap}
 
 /* PRINT */
 @media print{
@@ -428,6 +445,13 @@ table{width:100%;table-layout:auto}
       <tbody id="brand-tbody"></tbody>
     </table>
   </div>
+
+  <div class="section custom-section">
+    <div class="sec-label">Custom line items</div>
+    <div id="custom-items-list"></div>
+    <button class="add-item-btn" onclick="addCustomItem()">+ Add custom item</button>
+  </div>
+
 </div>
 
 <div class="right">
@@ -448,6 +472,7 @@ table{width:100%;table-layout:auto}
     <div class="bd-title">Package breakdown by brand</div>
     <div id="s-breakdown"><div class="bc"><div class="empty">Select brands on the left to build your quote</div></div></div>
   </div>
+  <div id="custom-summary-wrap"></div>
   <div class="disc off" id="s-disc">
     <span class="dl2" id="d-label">Select 2+ brands to unlock Impact Discount (15% off total)</span>
     <span class="dv" id="d-val"></span>
@@ -783,7 +808,8 @@ function recalc(){
     if(sE)ep=EC[b.id][s.tier]||0;if(sB)sp=SMB[b.id][s.bundle]||0;
     ecT+=ep;smbT+=sp;cards.push({name:b.name,id:b.id,ep,sp,tier:s.tier,bundle:s.bundle,total:ep+sp});
   });
-  const grand_before_disc=ecT+smbT;
+  const customT=customTotal();
+  const grand_before_disc=ecT+smbT+customT;
   const disc=active.length>=2?Math.round(grand_before_disc*0.15):0;
   const grand=grand_before_disc-disc;
   document.getElementById('s-grand').textContent=fmt(grand);
@@ -800,6 +826,23 @@ function recalc(){
   const ecEl=document.getElementById('s-ec-total'),smbEl=document.getElementById('s-smb-total');
   ecEl.textContent=sE?fmt(ecT):'—';ecEl.className='sc-val'+(sE&&ecT>0?'':' dim');
   smbEl.textContent=sB?fmt(smbT):'—';smbEl.className='sc-val'+(sB&&smbT>0?'':' dim');
+  // Custom items summary
+  const csw = document.getElementById('custom-summary-wrap');
+  if (csw) {
+    const activeCustom = customItems.filter(i => i.name || i.price > 0);
+    if (activeCustom.length > 0) {
+      csw.innerHTML = `<div class="custom-summary">
+        <div class="custom-summary-head">Custom Items</div>
+        ${activeCustom.map(i => `<div class="custom-line">
+          <span class="custom-line-name">${i.name || 'Unnamed item'}</span>
+          <span class="custom-line-val">${fmt(i.price)}</span>
+        </div>`).join('')}
+      </div>`;
+    } else {
+      csw.innerHTML = '';
+    }
+  }
+
   const bd=document.getElementById('s-breakdown');
   if(!cards.length){bd.innerHTML='<div class="bc"><div class="empty">Select brands on the left to build your quote</div></div>';}
   else{bd.innerHTML=cards.map(c=>{
@@ -822,7 +865,7 @@ function printProposal(){
   const pkgL={ec:'Event Coverage Only',smb:'Promotional Bundle Only',combined:'Combined Package'};
   let ecT=0,smbT=0;
   active.forEach(b=>{const s=state[b.id];if(sE)ecT+=EC[b.id][s.tier]||0;if(sB)smbT+=SMB[b.id][s.bundle]||0;});
-  const grand_before_disc=ecT+smbT,disc=active.length>=2?Math.round(grand_before_disc*0.15):0,grand=grand_before_disc-disc,rep=document.getElementById('rep').value;
+  const customT=customTotal(),grand_before_disc=ecT+smbT+customT,disc=active.length>=2?Math.round(grand_before_disc*0.15):0,grand=grand_before_disc-disc,rep=document.getElementById('rep').value;
   document.getElementById('p-client').textContent=document.getElementById('client').value||'—';
   document.getElementById('p-event').textContent=document.getElementById('event').value||'—';
   document.getElementById('p-date').textContent=document.getElementById('edate').value||'—';
@@ -843,6 +886,15 @@ function printProposal(){
     h+=`<tr class="sr"><td colspan="6" style="text-align:right;padding-right:12px">Bundle Subtotal</td><td>${fmtN(smbT)}</td></tr></tbody></table>`;
     document.getElementById('p-smb-section').innerHTML=h;
   }else document.getElementById('p-smb-section').innerHTML='';
+  // Custom items in print
+  const activeCustom = customItems.filter(i => i.name || i.price > 0);
+  if (activeCustom.length > 0) {
+    let ch = `<div class="pst">Custom Items</div><table class="pt"><thead><tr><th>Description</th><th>Price (JMD)</th></tr></thead><tbody>`;
+    activeCustom.forEach(i => { ch += `<tr><td>${i.name||'Unnamed item'}</td><td>${fmtN(i.price)}</td></tr>`; });
+    ch += `<tr class="sr"><td style="text-align:right;padding-right:12px">Custom Subtotal</td><td>${fmtN(customT)}</td></tr></tbody></table>`;
+    document.getElementById('p-ec-section').innerHTML += ch;
+  }
+
   document.getElementById('p-discount-section').innerHTML=disc>0?`
   <div class="pdr">
     <div>
@@ -862,6 +914,52 @@ function resetAll(){
   ['client','contact','event','edate','rep'].forEach(id=>document.getElementById(id).value='');
   setPkg('ec');
 }
+// CUSTOM LINE ITEMS
+let customItems = [];
+let customIdCounter = 0;
+
+function addCustomItem() {
+  const id = ++customIdCounter;
+  customItems.push({id, name:'', price:0});
+  renderCustomItems();
+}
+
+function removeCustomItem(id) {
+  customItems = customItems.filter(i => i.id !== id);
+  renderCustomItems();
+  recalc();
+}
+
+function updateCustomItem(id, field, value) {
+  const item = customItems.find(i => i.id === id);
+  if (!item) return;
+  if (field === 'price') {
+    item.price = parseFloat(value.replace(/[^0-9.]/g,'')) || 0;
+  } else {
+    item.name = value;
+  }
+  recalc();
+}
+
+function renderCustomItems() {
+  const list = document.getElementById('custom-items-list');
+  if (!list) return;
+  list.innerHTML = customItems.map(item => `
+    <div class="custom-item">
+      <input type="text" placeholder="Description e.g. YouTube Live Stream" value="${item.name}"
+        oninput="updateCustomItem(${item.id},'name',this.value)" />
+      <input type="text" class="price-input" placeholder="JMD 0" value="${item.price > 0 ? item.price.toLocaleString('en-US') : ''}"
+        oninput="updateCustomItem(${item.id},'price',this.value)" />
+      <button class="remove-btn" onclick="removeCustomItem(${item.id})">&#10005;</button>
+    </div>
+  `).join('');
+}
+
+function customTotal() {
+  return customItems.reduce((sum, i) => sum + (i.price || 0), 0);
+}
+
+
 setPkg('ec');recalc();
 
 
