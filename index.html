@@ -58,16 +58,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 
 /* PACKAGE BUTTONS */
 .pkg-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.pkg-btn{padding:10px 4px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--white);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:600;color:var(--muted);text-align:center;transition:all 0.15s;line-height:1.4}
+.pkg-btn{padding:10px 4px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--white);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;color:var(--muted);text-align:center;transition:all 0.15s;line-height:1.4;word-break:normal;hyphens:auto}
 .pkg-btn:hover{border-color:var(--navy-mid);color:var(--navy)}
 .pkg-btn.active{border-color:var(--navy-mid);background:#f0f4f9;color:var(--navy)}
 
 /* BRAND TABLE */
-.bt{width:100%;border-collapse:collapse;table-layout:fixed}
+.bt{width:100%;border-collapse:collapse;table-layout:fixed;word-break:break-word}
 .bt th{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 5px 8px;text-align:left;border-bottom:1.5px solid var(--border);overflow:hidden}
 .bt td{padding:9px 7px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
 .bt tr:last-child td{border-bottom:none}
-.brand-cell{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1a202c;white-space:nowrap}
+.brand-cell{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1a202c;overflow:hidden}
 .toggle-wrap{display:flex;gap:4px}
 .tog{padding:5px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.15s;background:var(--white);color:var(--muted)}
 .tog.yes.active{background:var(--green-light);border-color:var(--green-border);color:var(--green)}
@@ -78,14 +78,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 
 /* RIGHT — SUMMARY */
 .s-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem}
-.s-client{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:#1a202c;line-height:1.1}
-.s-event{font-size:14px;color:var(--muted);margin-top:4px;font-weight:500}
+.s-client{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:#1a202c;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.s-event{font-size:14px;color:var(--muted);margin-top:4px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
 
 /* TOTAL CARD */
 .total-card{background:var(--navy);border-radius:var(--radius-lg);padding:1.375rem 1.5rem;margin-bottom:1.125rem;position:relative;overflow:hidden}
 .total-card::before{content:'';position:absolute;top:-40px;right:-20px;width:140px;height:140px;border-radius:50%;background:rgba(201,168,76,0.08)}
 .tc-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:5px}
-.tc-amount{font-family:'Fraunces',serif;font-size:36px;font-weight:700;color:var(--gold);position:relative;z-index:1}
+.tc-amount{font-family:'Fraunces',serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--gold);position:relative;z-index:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tc-tag{display:inline-block;margin-top:7px;padding:3px 13px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:20px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.55);position:relative;z-index:1}
 
 /* SUB CARDS */
@@ -100,7 +100,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .bd-title{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem}
 .bc{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:8px;box-shadow:var(--shadow-sm);transition:box-shadow 0.15s}.bc:hover{box-shadow:var(--shadow-md)}
 .bc-head{display:flex;justify-content:space-between;align-items:center;padding:10px 13px;background:#f8f9fb;border-bottom:1px solid var(--border)}
-.bc-name{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:7px}
+.bc-name{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden}
 .bc-right{display:flex;align-items:center;gap:9px}
 .bc-total{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--red)}
 .det-btn{padding:4px 11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;border:1.5px solid var(--border);border-radius:6px;background:var(--white);cursor:pointer;color:var(--muted);transition:all 0.15s}
@@ -119,7 +119,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .empty{padding:1.75rem;text-align:center;font-size:13px;color:var(--muted);font-weight:500}
 
 /* DISCOUNT */
-.disc{border-radius:var(--radius);padding:11px 15px;margin-bottom:1.125rem;display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:8px;flex-wrap:wrap}
+.disc{border-radius:var(--radius);padding:11px 15px;margin-bottom:1.125rem;display:flex;justify-content:space-between;align-items:center;font-size:13px;gap:6px;flex-wrap:wrap;word-break:break-word}
 .disc.off{background:var(--surface);border:1.5px dashed var(--border);color:var(--muted)}
 .disc.on{background:var(--green-light);border:2px solid var(--green-border);box-shadow:0 2px 8px rgba(39,103,73,0.15)}
 .disc.on .dl2{color:var(--green);font-weight:700;font-size:13px}
@@ -173,7 +173,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .mk-stats{display:grid;grid-template-columns:repeat(5,1fr);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.75rem;min-width:0}
 .mk-stat{padding:1rem 0.625rem;text-align:center;border-right:1px solid var(--border)}
 .mk-stat:last-child{border-right:none}
-.mk-sn{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--navy)}
+.mk-sn{font-family:'Fraunces',serif;font-size:clamp(16px,2vw,22px);font-weight:700;color:var(--navy)}
 .mk-sl{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;line-height:1.3}
 .mk-sec{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.875rem;display:flex;align-items:center;gap:8px}
 .mk-sec::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -181,14 +181,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 .mkbc{border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .mkbc-head{padding:11px 14px;display:flex;align-items:center;gap:10px}
 .mkbc-logo{height:30px;width:auto;object-fit:contain;flex-shrink:0;background:rgba(255,255,255,0.9);border-radius:4px;padding:2px 4px}
-.mkbc-name{font-size:13px;font-weight:700;color:var(--white);flex:1;min-width:0}
+.mkbc-name{font-size:13px;font-weight:700;color:var(--white);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mkbc-fol{font-size:11px;font-weight:600;color:rgba(255,255,255,0.6);white-space:nowrap}
 .mkbc-body{padding:12px 14px}
 .mkr{display:flex;justify-content:space-between;align-items:flex-start;padding:5px 0;border-bottom:1px solid #f5f5f5;font-size:12px;gap:8px;flex-wrap:wrap}
 .mkr:last-child{border-bottom:none}
-.mkrl{color:var(--slate);font-weight:500}
+.mkrl{color:var(--slate);font-weight:500;min-width:0;overflow:hidden}
 .mkrn{font-size:10px;color:var(--muted)}
-.mkrv{font-weight:700;color:var(--navy);white-space:nowrap;flex-shrink:0}
+.mkrv{font-weight:700;color:var(--navy);white-space:nowrap;flex-shrink:0;margin-left:auto;padding-left:8px}
 .mkrv.add{color:var(--green);font-size:11px}
 .mksh{font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:7px 0 3px;margin-top:3px;border-top:1px solid #f0f0f0}
 .mksh:first-child{border-top:none;padding-top:0}
@@ -259,7 +259,7 @@ table{width:100%;table-layout:auto}
   .right{overflow-y:visible;padding:1.25rem}
   .hd{display:none}
   .header-sub{display:none}
-  .header-title{font-size:15px}
+  .header-title{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:calc(100vw - 180px)}
   .logo-img{height:38px}
   .mk-btn{font-size:11px;padding:6px 12px}
   .int-badge{display:none}
@@ -445,7 +445,7 @@ table{width:100%;table-layout:auto}
     <div id="s-breakdown"><div class="bc"><div class="empty">Select brands on the left to build your quote</div></div></div>
   </div>
   <div class="disc off" id="s-disc">
-    <span class="dl2" id="d-label">Select 2+ brands to unlock Impact Discount (15%)</span>
+    <span class="dl2" id="d-label">Select 2+ brands to unlock Impact Discount (15% off total)</span>
     <span class="dv" id="d-val"></span>
   </div>
   <div class="divider"></div>
@@ -779,7 +779,9 @@ function recalc(){
     if(sE)ep=EC[b.id][s.tier]||0;if(sB)sp=SMB[b.id][s.bundle]||0;
     ecT+=ep;smbT+=sp;cards.push({name:b.name,id:b.id,ep,sp,tier:s.tier,bundle:s.bundle,total:ep+sp});
   });
-  const disc=(active.length>=2&&sB)?Math.round(smbT*0.15):0,grand=ecT+smbT-disc;
+  const grand_before_disc=ecT+smbT;
+  const disc=active.length>=2?Math.round(grand_before_disc*0.15):0;
+  const grand=grand_before_disc-disc;
   document.getElementById('s-grand').textContent=fmt(grand);
   // Show discount badge in total card
   let discBadge = document.getElementById('tc-disc-badge');
@@ -790,10 +792,10 @@ function recalc(){
     document.getElementById('s-grand').parentNode.insertBefore(discBadge, document.getElementById('s-grand').nextSibling);
   }
   discBadge.style.display = disc>0 ? 'inline-block' : 'none';
-  discBadge.textContent = disc>0 ? '✓ Impact Discount Applied — saving JMD '+Math.round(disc).toLocaleString('en-US') : '';
+  discBadge.textContent = disc>0 ? '✓ Impact Discount (15%) — saving JMD '+Math.round(disc).toLocaleString('en-US') : '';
   const ecEl=document.getElementById('s-ec-total'),smbEl=document.getElementById('s-smb-total');
   ecEl.textContent=sE?fmt(ecT):'—';ecEl.className='sc-val'+(sE&&ecT>0?'':' dim');
-  smbEl.textContent=sB?fmt(smbT-disc):'—';smbEl.className='sc-val'+(sB&&smbT>0?'':' dim');
+  smbEl.textContent=sB?fmt(smbT):'—';smbEl.className='sc-val'+(sB&&smbT>0?'':' dim');
   const bd=document.getElementById('s-breakdown');
   if(!cards.length){bd.innerHTML='<div class="bc"><div class="empty">Select brands on the left to build your quote</div></div>';}
   else{bd.innerHTML=cards.map(c=>{
@@ -805,9 +807,9 @@ function recalc(){
     return`<div class="bc"><div class="bc-head"><span class="bc-name">${logoImg(c.id,22)} ${c.name}</span><div class="bc-right"><button class="det-btn" onclick="showModal('${c.id}')">All tiers ↗</button><span class="bc-total">${fmt(c.total)}</span></div></div><div class="bc-body">${rows}</div></div>`;
   }).join('');}
   const dr=document.getElementById('s-disc'),dl=document.getElementById('d-label'),dv=document.getElementById('d-val');
-  if(disc>0){dr.className='disc on';dl.textContent='✓ Impact Discount (15%) activated';dv.textContent='−JMD '+Math.round(disc).toLocaleString('en-US');}
-  else if(active.length>0&&sB){dr.className='disc off';dl.textContent=active.length+'/2 brands — add '+(2-active.length)+' more to unlock Impact Discount (15%)';dv.textContent='';}
-  else{dr.className='disc off';dl.textContent='Select 2+ brands to unlock Impact Discount (15%)';dv.textContent='';}
+  if(disc>0){dr.className='disc on';dl.textContent='✓ Impact Discount (15% off total) activated';dv.textContent='−JMD '+Math.round(disc).toLocaleString('en-US');}
+  else if(active.length>0){dr.className='disc off';dl.textContent=active.length+'/2 brands — add '+(2-active.length)+' more to unlock Impact Discount (15% off total)';dv.textContent='';}
+  else{dr.className='disc off';dl.textContent='Select 2+ brands to unlock Impact Discount (15% off total)';dv.textContent='';}
 }
 
 function printProposal(){
@@ -816,7 +818,7 @@ function printProposal(){
   const pkgL={ec:'Event Coverage Only',smb:'Promotional Bundle Only',combined:'Combined Package'};
   let ecT=0,smbT=0;
   active.forEach(b=>{const s=state[b.id];if(sE)ecT+=EC[b.id][s.tier]||0;if(sB)smbT+=SMB[b.id][s.bundle]||0;});
-  const disc=(active.length>=2&&sB)?Math.round(smbT*0.15):0,grand=ecT+smbT-disc,rep=document.getElementById('rep').value;
+  const grand_before_disc=ecT+smbT,disc=active.length>=2?Math.round(grand_before_disc*0.15):0,grand=grand_before_disc-disc,rep=document.getElementById('rep').value;
   document.getElementById('p-client').textContent=document.getElementById('client').value||'—';
   document.getElementById('p-event').textContent=document.getElementById('event').value||'—';
   document.getElementById('p-date').textContent=document.getElementById('edate').value||'—';
@@ -824,7 +826,7 @@ function printProposal(){
   document.getElementById('p-pkg-tag').textContent=pkgL[pkg];
   document.getElementById('p-grand').textContent=fmt(grand);
   document.getElementById('p-ec-sub').textContent=sE?fmt(ecT):'—';
-  document.getElementById('p-smb-sub').textContent=sB?fmt(smbT-disc):'—';
+  document.getElementById('p-smb-sub').textContent=sB?fmt(smbT):'—';
   if(sE&&active.length){
     let h=`<div class="pst">Event Coverage</div><table class="pt"><thead><tr><th>Brand</th><th>Tier</th><th>Promo Posts</th><th>Promo Stories</th><th>Event Stories</th><th>Live Posts</th><th>Price (JMD)</th></tr></thead><tbody>`;
     active.forEach(b=>{const s=state[b.id],d=EC_D[s.tier],p=EC[b.id][s.tier];h+=`<tr><td><strong>${b.name}</strong></td><td>${s.tier}</td><td>${d.posts}</td><td>${d.stories}</td><td>${d.event_stories}</td><td>${d.live}</td><td>${fmtN(p)}</td></tr>`;});
@@ -841,7 +843,7 @@ function printProposal(){
   <div class="pdr">
     <div>
       <div class="pdl">✓ Impact Discount Applied</div>
-      <div style="font-size:11px;color:var(--green);margin-top:2px">15% off Promotional Bundles — ${active.length} brands selected</div>
+      <div style="font-size:11px;color:var(--green);margin-top:2px">15% off total — ${active.length} brands selected</div>
     </div>
     <div style="text-align:right">
       <div class="pdv">−JMD ${fmtN(disc)}</div>
