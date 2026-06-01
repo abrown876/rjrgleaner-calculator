@@ -64,11 +64,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 
 /* BRAND TABLE */
 .bt{width:100%;border-collapse:collapse;table-layout:fixed;word-break:break-word}
-.bt th{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 5px 8px;text-align:left;border-bottom:1.5px solid var(--border);overflow:hidden}
-.bt td{padding:9px 7px;border-bottom:1px solid #f0f0f0;vertical-align:middle}
+.bt th{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:0 5px 8px;text-align:left;border-bottom:1.5px solid var(--border);overflow:hidden;vertical-align:bottom}
+.bt td{padding:8px 5px;border-bottom:1px solid #f0f0f0;vertical-align:middle;text-align:left}
 .bt tr:last-child td{border-bottom:none}
+.bt th:nth-child(1),.bt td:nth-child(1){width:30%}
+.bt th:nth-child(2),.bt td:nth-child(2){width:26%;text-align:left}
+.bt th:nth-child(3),.bt td:nth-child(3){width:22%}
+.bt th:nth-child(4),.bt td:nth-child(4){width:22%}
 .brand-cell{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1a202c;overflow:hidden}
-.toggle-wrap{display:flex;gap:4px}
+.toggle-wrap{display:flex;flex-direction:row;gap:4px;align-items:center;flex-wrap:nowrap;width:max-content}
 .tog{padding:5px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.15s;background:var(--white);color:var(--muted)}
 .tog.yes.active{background:var(--green-light);border-color:var(--green-border);color:var(--green)}
 .tog.no.active{background:var(--surface);color:var(--muted)}
