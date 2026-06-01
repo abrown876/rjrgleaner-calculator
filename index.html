@@ -912,6 +912,8 @@ function printProposal(){
 function resetAll(){
   BRANDS.forEach(b=>{state[b.id]={active:false,tier:'Standard',bundle:'Boost'}});
   ['client','contact','event','edate','rep'].forEach(id=>document.getElementById(id).value='');
+  customItems=[];customIdCounter=0;renderCustomItems();
+  const csw=document.getElementById('custom-summary-wrap');if(csw)csw.innerHTML='';
   setPkg('ec');
 }
 // CUSTOM LINE ITEMS
